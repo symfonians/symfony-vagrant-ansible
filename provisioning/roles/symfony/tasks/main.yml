@@ -1,0 +1,28 @@
+---
+- name: Install composer
+  shell:
+    curl -sS https://getcomposer.org/installer | /usr/bin/php && /bin/mv -f /home/vagrant/composer.phar /usr/local/bin/composer
+    creates=/usr/local/bin/composer
+
+- name: Check if symfony is installed
+  stat: path=/vagrant/{{ symfony_folder }}
+  register: sf_folder
+
+- name: Install Symfony
+  command: /usr/local/bin/composer create-project symfony/framework-standard-edition /vagrant/{{ symfony_folder }} {{symfony_version}} --no-interaction
+  when: sf_folder.stat.isdir is not defined
+
+# - name: Create Symfony config folder
+#   file: dest=/vagrant/symfony/app/config mode=777 state=directory
+  
+# - name: Install symfony
+#   command: /usr/local/bin/composer update --working-dir=/vagrant/symfony chdir=/vagrant/symfony
+
+# - name: Create final composer.json
+#   template: src=composer.json dest=/vagrant/symfony/composer.json
+
+- name: Create parameters.yml
+  template: src=parameters.yml dest=/vagrant/{{ symfony_folder }}/app/config/parameters.yml mode=644
+  
+- name: Update app_dev.php
+  template: src=app_dev.php dest=/vagrant/{{ symfony_folder }}/web/app_dev.php mode=444

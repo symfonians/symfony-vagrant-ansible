@@ -1,0 +1,11 @@
+---
+- name: Symfony with LNPP-Vagrant-Ansible
+  hosts: all
+  sudo: yes
+      
+  roles:
+    - common
+    - php-fpm
+    - postgres
+    - symfony
+    - nginx

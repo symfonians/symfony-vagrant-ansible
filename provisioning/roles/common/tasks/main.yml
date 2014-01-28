@@ -1,0 +1,9 @@
+---
+- name: update the apt cache
+  apt: update_cache=yes
+  
+- name: Install vim
+  apt: pkg=vim state=latest
+  
+- name: Install cURL
+  apt:  pkg=curl state=latest
