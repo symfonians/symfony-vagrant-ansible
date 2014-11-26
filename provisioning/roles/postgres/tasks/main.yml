@@ -13,6 +13,7 @@
       - postgresql
       - libpq-dev
       - python-psycopg2
+      - php5-pgsql
 
 - name: ensure database is created
   sudo_user: postgres
