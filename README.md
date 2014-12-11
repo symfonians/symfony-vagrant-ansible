@@ -39,3 +39,7 @@ To ajust the Ansible parameters, database and some flavors, edit the playbook gl
     provisioning/group_vars/all
 
 Enjoy!
+
+## Symfony
+
+Visit http://192.168.100.100/app_dev.php
